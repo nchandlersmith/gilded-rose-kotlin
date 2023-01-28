@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource
 internal class GildedRoseTest {
     @ParameterizedTest(name = "initialSellIn: {0} expectedSellIn: {1}")
     @CsvSource(
-        "1, 0", // has not expired
+        "1, 0", // not expired
         "0, -1", // expiration day
         "-1, -2", // expired
     )
@@ -29,9 +29,9 @@ internal class GildedRoseTest {
     }
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
     @CsvSource(
-        "1, 0, 0", // not expired quality cannot be below 0
-        "0, 0, 0", // expiration day quality cannot be below 0
-        "-1, 0, 0", // expired quality cannot be below 0
+        "1, 0, 0", // not expired
+        "0, 0, 0", // expiration day
+        "-1, 0, 0", // expired
     )
     fun `updateQuality normal item quality cannot be negative`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("normal item", sellIn, initialQuality))
