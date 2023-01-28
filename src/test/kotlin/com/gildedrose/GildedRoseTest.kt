@@ -145,6 +145,12 @@ internal class GildedRoseTest {
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(expectedQuality)
     }
+    @Test
+    fun `updateQuality sulfurus sellIn does not decrement`() {
+        val items = arrayOf(Item("Sulfuras, Hand of Ragnaros", 10, 80))
+        GildedRose(items).updateQuality()
+        assertThat(items.get(0).sellIn).isEqualTo(10)
+    }
 }
 
 
