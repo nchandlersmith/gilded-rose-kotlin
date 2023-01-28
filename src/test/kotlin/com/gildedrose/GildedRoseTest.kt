@@ -31,7 +31,9 @@ internal class GildedRoseTest {
     @CsvSource(
         "1, 0, 0", // not expired
         "0, 0, 0", // expiration day
+        "0, 1, 0", // expiration day
         "-1, 0, 0", // expired
+        "-1, 1, 0", // expired
     )
     fun `updateQuality normal item quality cannot be negative`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("normal item", sellIn, initialQuality))
