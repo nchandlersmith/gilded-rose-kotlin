@@ -131,6 +131,20 @@ internal class GildedRoseTest {
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(expectedQuality)
     }
+    @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality {2}")
+    @CsvSource(
+        "11, 50, 50",
+        "10, 50, 50",
+        "10, 49, 50",
+        "5, 50, 50",
+        "5, 49, 50",
+        "5, 48, 50",
+    )
+    fun `updateQuality backstage passes quality cannot be greater than 50`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+        val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert",sellIn, initialQuality))
+        GildedRose(items).updateQuality()
+        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+    }
 }
 
 
