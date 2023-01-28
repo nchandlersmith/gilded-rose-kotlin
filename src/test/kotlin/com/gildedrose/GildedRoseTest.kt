@@ -88,7 +88,7 @@ internal class GildedRoseTest {
         "0, -1",
         "-1, -2",
     )
-    fun `updateQuality backstage passess sellIn decrements`(initialSellIn: Int, expectedSellIn: Int) {
+    fun `updateQuality backstage passes sellIn decrements`(initialSellIn: Int, expectedSellIn: Int) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, 7))
         GildedRose(items).updateQuality()
         assertThat(items.get(0).sellIn).isEqualTo(expectedSellIn)
@@ -98,6 +98,17 @@ internal class GildedRoseTest {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", 11, 20))
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(21)
+    }
+    @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality {2}")
+    @CsvSource(
+        "10, 20, 22",
+        "9, 20, 22",
+        "6, 20, 22"
+    )
+    fun `updateQuality backstage passes quality increases by 2`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+        val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert",sellIn, initialQuality))
+        GildedRose(items).updateQuality()
+        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
     }
 }
 
