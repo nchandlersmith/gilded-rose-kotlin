@@ -1,6 +1,7 @@
 package com.gildedrose
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -22,7 +23,7 @@ internal class GildedRoseTest {
         "0, 3, 1", // expiration day
         "-1, 3, 1", // expired
     )
-    fun `updateQuality normal item quality_decreases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+    fun `updateQuality normal item quality decreases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("normal item", sellIn, initialQuality))
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(expectedQuality)
@@ -57,7 +58,7 @@ internal class GildedRoseTest {
         "0, 3, 5", // expiration day
         "-1, 3, 5", // expired
     )
-    fun `updateQuality aged brie quality_increases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+    fun `updateQuality aged brie quality increases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("Aged Brie", sellIn, initialQuality))
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(expectedQuality)
@@ -70,7 +71,7 @@ internal class GildedRoseTest {
         "-1, 49, 50", // expired
         "-1, 50, 50", // expired
     )
-    fun `updateQuality aged bried cannot be greater than 50`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+    fun `updateQuality aged brie quality cannot be greater than 50`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("Aged Brie", sellIn, initialQuality))
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(expectedQuality)
@@ -87,10 +88,16 @@ internal class GildedRoseTest {
         "0, -1",
         "-1, -2",
     )
-    fun `updateQuality Backstage Passess sellIn decrements`(initialSellIn: Int, expectedSellIn: Int) {
+    fun `updateQuality backstage passess sellIn decrements`(initialSellIn: Int, expectedSellIn: Int) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, 7))
         GildedRose(items).updateQuality()
         assertThat(items.get(0).sellIn).isEqualTo(expectedSellIn)
+    }
+    @Test
+    fun `updateQuality backstage passes quality increases by 1`() {
+        val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", 11, 20))
+        GildedRose(items).updateQuality()
+        assertThat(items.get(0).quality).isEqualTo(21)
     }
 }
 
