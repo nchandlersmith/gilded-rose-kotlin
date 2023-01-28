@@ -60,6 +60,19 @@ internal class GildedRoseTest {
         GildedRose(items).updateQuality()
         assertThat(items.get(0).quality).isEqualTo(expectedQuality)
     }
+    @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
+    @CsvSource(
+        "1, 50, 50", // not expired
+        "0, 49, 50", // expiration day
+        "0, 50, 50", // expiration day
+        "-1, 49, 50", // expired
+        "-1, 50, 50", // expired
+    )
+    fun `updateQuality aged bried cannot be greater than 50`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+        val items = arrayOf(Item("Aged Brie", sellIn, initialQuality))
+        GildedRose(items).updateQuality()
+        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+    }
 }
 
 
