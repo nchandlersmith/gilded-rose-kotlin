@@ -9,6 +9,7 @@ class ShopItemFactory {
             "Aged Brie" -> AgedBrie(item)
             "Backstage passes to a TAFKAL80ETC concert" -> BackStagePasses(item)
             "Sulfuras, Hand of Ragnaros" -> Sulfurus(item)
+            "Conjured Item" -> Conjured(item)
             else -> Normal(item)
         }
 }

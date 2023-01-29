@@ -27,7 +27,7 @@ internal class GildedRoseTest {
     fun `updateQuality normal item quality decreases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("normal item", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
@@ -41,7 +41,7 @@ internal class GildedRoseTest {
     fun `updateQuality normal item quality cannot be negative`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("normal item", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "initialSellIn: {0} expectedSellIn: {1}")
@@ -53,7 +53,7 @@ internal class GildedRoseTest {
     fun `updateQuality Aged Brie sellIn decrements`(initialSellIn: Int, expectedSellIn: Int) {
         val items = arrayOf(Item("Aged Brie", initialSellIn, 7))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).sellIn).isEqualTo(expectedSellIn)
+        assertThat(items[0].sellIn).isEqualTo(expectedSellIn)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
@@ -65,7 +65,7 @@ internal class GildedRoseTest {
     fun `updateQuality aged brie quality increases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("Aged Brie", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
@@ -83,7 +83,7 @@ internal class GildedRoseTest {
     ) {
         val items = arrayOf(Item("Aged Brie", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "initialSellIn: {0} expectedQuality: {1}")
@@ -101,14 +101,14 @@ internal class GildedRoseTest {
     fun `updateQuality backstage passes sellIn decrements`(initialSellIn: Int, expectedSellIn: Int) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, 7))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).sellIn).isEqualTo(expectedSellIn)
+        assertThat(items[0].sellIn).isEqualTo(expectedSellIn)
     }
 
     @Test
     fun `updateQuality backstage passes quality increases by 1`() {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", 11, 20))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(21)
+        assertThat(items[0].quality).isEqualTo(21)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality {2}")
@@ -124,7 +124,7 @@ internal class GildedRoseTest {
     ) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality {2}")
@@ -140,7 +140,7 @@ internal class GildedRoseTest {
     ) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality {2}")
@@ -151,7 +151,7 @@ internal class GildedRoseTest {
     fun `updateQuality backstage passes quality drops to 0`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality {2}")
@@ -170,21 +170,21 @@ internal class GildedRoseTest {
     ) {
         val items = arrayOf(Item("Backstage passes to a TAFKAL80ETC concert", sellIn, initialQuality))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(expectedQuality)
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 
     @Test
     fun `updateQuality sulfurus sellIn does not decrement`() {
         val items = arrayOf(Item("Sulfuras, Hand of Ragnaros", 10, 80))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).sellIn).isEqualTo(10)
+        assertThat(items[0].sellIn).isEqualTo(10)
     }
 
     @Test
     fun `updateQuality sulfurus quality does not decrement`() {
         val items = arrayOf(Item("Sulfuras, Hand of Ragnaros", 10, 70))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).quality).isEqualTo(70)
+        assertThat(items[0].quality).isEqualTo(70)
     }
 
     @Test
@@ -192,7 +192,49 @@ internal class GildedRoseTest {
         val name = "some name"
         val items = arrayOf(Item(name, 10, 70))
         GildedRose(items).updateQuality()
-        assertThat(items.get(0).name).isEqualTo(name)
+        assertThat(items[0].name).isEqualTo(name)
+    }
+
+    @ParameterizedTest(name = "initialSellIn: {0} expectedSellIn: {1}")
+    @CsvSource(
+        "1, 0", // not expired
+        "0, -1", // expiration day
+        "-1, -2", // expired
+    )
+    fun `updateQuality conjured item decrements sellIn`(initialSellIn: Int, expectedSellInt: Int) {
+        val items = arrayOf(Item("Conjured Item", initialSellIn, 7))
+        GildedRose(items).updateQuality()
+        assertThat(items[0].sellIn).isEqualTo(expectedSellInt)
+    }
+
+    @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
+    @CsvSource(
+        "1, 4, 2", // not expired
+        "0, 4, 0", // expiration day
+        "-1, 4, 0", // expired
+    )
+    fun `updateQuality conjured item quality decreases`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+        val items = arrayOf(Item("Conjured Item", sellIn, initialQuality))
+        GildedRose(items).updateQuality()
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
+    }
+
+    @ParameterizedTest(name = "sellIn: {0} initialQuality: {1} expectedQuality: {2}")
+    @CsvSource(
+        "1, 1, 0", // not expired
+        "0, 3, 0", // expiration day
+        "0, 2, 0", // expiration day
+        "0, 1, 0", // expiration day
+        "0, 0, 0", // expiration day
+        "-1, 3, 0", // expired
+        "-1, 2, 0", // expired
+        "-1, 1, 0", // expired
+        "-1, 0, 0", // expired
+    )
+    fun `updateQuality normal conjured quality cannot be negative`(sellIn: Int, initialQuality: Int, expectedQuality: Int) {
+        val items = arrayOf(Item("Conjured Item", sellIn, initialQuality))
+        GildedRose(items).updateQuality()
+        assertThat(items[0].quality).isEqualTo(expectedQuality)
     }
 }
 
