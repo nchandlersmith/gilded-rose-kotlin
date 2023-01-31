@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 
 internal class GildedRoseTest {
     @ParameterizedTest(name = "initialSellIn: {0} expectedSellIn: {1}")
@@ -157,12 +158,12 @@ internal class GildedRoseTest {
         GildedRose(items).updateQuality()
         assertThat(items[0].quality).isEqualTo(70)
     }
-    @Test
-    fun `updateQuality item name does not change`() {
-        val itemName = "some item name"
-        val items = arrayOf(Item(itemName, 12, 40))
+    @ParameterizedTest
+    @ValueSource(strings = ["normal item", "Sulfuras, Hand of Ragnaros", "Backstage passes to a TAFKAL80ETC concert", "Aged Brie"])
+    fun `updateQuality item name does not change`(expectedItemName: String) {
+        val items = arrayOf(Item(expectedItemName, 12, 40))
             GildedRose(items).updateQuality()
-        assertThat(items[0].name).isEqualTo(itemName)
+        assertThat(items[0].name).isEqualTo(expectedItemName)
     }
 }
 
